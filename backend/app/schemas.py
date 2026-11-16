@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from typing import Any, Generic, TypeVar
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 T = TypeVar("T")
 
@@ -26,6 +26,17 @@ class EntryPayload(BaseModel):
 
     values: dict[str, Any] = Field(default_factory=dict)
     remark: str | None = None
+
+
+class RecordPayload(EntryPayload):
+    """写入请求日志时提交的字段：既接受 values 包裹，也接受直接平铺日志字段。"""
+
+    model_config = ConfigDict(extra="allow")
+
+    def merged_values(self) -> dict[str, Any]:
+        merged = dict(self.model_extra or {})
+        merged.update(self.values)
+        return merged
 
 
 

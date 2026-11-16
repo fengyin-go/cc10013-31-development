@@ -19,6 +19,7 @@ const Ratelimit = () => import('@/views/ratelimit/index.vue')
 const Log = () => import('@/views/log/index.vue')
 const Delta = () => import('@/views/delta/index.vue')
 const Export = () => import('@/views/export/index.vue')
+const Audit = () => import('@/views/audit/index.vue')
 
 const router = createRouter({
   history: createWebHistory(),
@@ -42,6 +43,7 @@ const router = createRouter({
     { path: '/log', name: 'log', component: Log },
     { path: '/delta', name: 'delta', component: Delta },
     { path: '/export', name: 'export', component: Export },
+    { path: '/audit', name: 'audit', component: Audit },
   ],
 })
 
